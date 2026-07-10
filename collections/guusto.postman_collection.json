@@ -1,0 +1,111 @@
+{
+  "info": {
+    "name": "Guusto Gifts API",
+    "description": "Programmatically send digital gifts, track order status, retrieve reward budgets, and pull recognition activity and manager-insight reports from Guusto. API access is available on the Guusto Premium plan. Base URL: https://api.guusto.com/api/v1 (production) or https://api-demo.guusto.io/api/v1 (demo). All requests require a Bearer API token and an X-Workspace-id header.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      { "key": "token", "value": "{{bearerToken}}", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://api.guusto.com/api/v1", "type": "string" },
+    { "key": "bearerToken", "value": "", "type": "string" },
+    { "key": "workspaceId", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Order Gift",
+      "item": [
+        {
+          "name": "Order gifts",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "X-Workspace-id", "value": "{{workspaceId}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"orderItems\": [\n    {\n      \"message\": \"Thanks for your great work!\",\n      \"amount\": 25,\n      \"recipient\": { \"firstName\": \"Alex\", \"lastName\": \"Doe\", \"email\": \"alex@example.com\" }\n    }\n  ],\n  \"currency\": \"USD\",\n  \"language\": \"EN_CA\"\n}" },
+            "url": { "raw": "{{baseUrl}}/orders", "host": ["{{baseUrl}}"], "path": ["orders"] },
+            "description": "Submit an order of 1 to 20 gift items."
+          }
+        },
+        {
+          "name": "Get order status",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Workspace-id", "value": "{{workspaceId}}" }],
+            "url": { "raw": "{{baseUrl}}/orders/status/:requestId", "host": ["{{baseUrl}}"], "path": ["orders", "status", ":requestId"], "variable": [{ "key": "requestId", "value": "" }] },
+            "description": "Retrieve the processing status of an order."
+          }
+        },
+        {
+          "name": "Get order",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Workspace-id", "value": "{{workspaceId}}" }],
+            "url": { "raw": "{{baseUrl}}/orders/:requestId", "host": ["{{baseUrl}}"], "path": ["orders", ":requestId"], "variable": [{ "key": "requestId", "value": "" }] },
+            "description": "Retrieve the full details of an order."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Account Budget",
+      "item": [
+        {
+          "name": "Get workspace budget",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Workspace-id", "value": "{{workspaceId}}" }],
+            "url": { "raw": "{{baseUrl}}/balances/workspaces/currencies/:currency", "host": ["{{baseUrl}}"], "path": ["balances", "workspaces", "currencies", ":currency"], "variable": [{ "key": "currency", "value": "USD" }] },
+            "description": "Retrieve the available reward budget for the workspace."
+          }
+        },
+        {
+          "name": "Get member budget",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Workspace-id", "value": "{{workspaceId}}" }],
+            "url": { "raw": "{{baseUrl}}/balances/members/:employeeNumber/currencies/:currency", "host": ["{{baseUrl}}"], "path": ["balances", "members", ":employeeNumber", "currencies", ":currency"], "variable": [{ "key": "employeeNumber", "value": "" }, { "key": "currency", "value": "USD" }] },
+            "description": "Retrieve the available reward budget for a single member."
+          }
+        },
+        {
+          "name": "Get all member budgets",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Workspace-id", "value": "{{workspaceId}}" }],
+            "url": { "raw": "{{baseUrl}}/balances/members/currencies/:currency?page=0&size=20", "host": ["{{baseUrl}}"], "path": ["balances", "members", "currencies", ":currency"], "query": [{ "key": "page", "value": "0" }, { "key": "size", "value": "20" }], "variable": [{ "key": "currency", "value": "USD" }] },
+            "description": "Retrieve paginated available reward budgets for all members."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Reports",
+      "item": [
+        {
+          "name": "Get team activity",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Workspace-id", "value": "{{workspaceId}}" }],
+            "url": { "raw": "{{baseUrl}}/reports/teams/activity?page=0&size=20", "host": ["{{baseUrl}}"], "path": ["reports", "teams", "activity"], "query": [{ "key": "page", "value": "0" }, { "key": "size", "value": "20" }] },
+            "description": "Retrieve paginated workspace recognition activity."
+          }
+        },
+        {
+          "name": "Get last recognized by manager",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Workspace-id", "value": "{{workspaceId}}" }],
+            "url": { "raw": "{{baseUrl}}/reports/members/last-recognized?page=0&size=20", "host": ["{{baseUrl}}"], "path": ["reports", "members", "last-recognized"], "query": [{ "key": "page", "value": "0" }, { "key": "size", "value": "20" }] },
+            "description": "Retrieve paginated last-recognized-by-manager data. Rate limited."
+          }
+        }
+      ]
+    }
+  ]
+}

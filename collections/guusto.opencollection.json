@@ -1,0 +1,131 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Guusto Gifts API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": { "name": "Order Gift", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Order gifts.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.guusto.com/api/v1/orders",
+            "headers": [
+              { "name": "X-Workspace-id", "value": "{{workspaceId}}" }
+            ],
+            "body": { "type": "json", "data": "{\"orderItems\":[{\"message\":\"Thanks!\",\"amount\":25,\"recipient\":{\"email\":\"alex@example.com\"}}],\"currency\":\"USD\"}" }
+          },
+          "docs": "Submit an order of 1 to 20 gift items."
+        },
+        {
+          "info": { "name": "Get order status.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.guusto.com/api/v1/orders/status/:requestId",
+            "headers": [{ "name": "X-Workspace-id", "value": "{{workspaceId}}" }],
+            "params": [
+              { "name": "requestId", "value": "", "type": "path", "description": "The order tracking ID." }
+            ]
+          },
+          "docs": "Retrieve the processing status of an order."
+        },
+        {
+          "info": { "name": "Get order.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.guusto.com/api/v1/orders/:requestId",
+            "headers": [{ "name": "X-Workspace-id", "value": "{{workspaceId}}" }],
+            "params": [
+              { "name": "requestId", "value": "", "type": "path", "description": "The order tracking ID." }
+            ]
+          },
+          "docs": "Retrieve the full details of an order."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Account Budget", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get workspace budget.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.guusto.com/api/v1/balances/workspaces/currencies/:currency",
+            "headers": [{ "name": "X-Workspace-id", "value": "{{workspaceId}}" }],
+            "params": [
+              { "name": "currency", "value": "USD", "type": "path", "description": "CAD or USD." }
+            ]
+          },
+          "docs": "Retrieve the available reward budget for the workspace."
+        },
+        {
+          "info": { "name": "Get member budget.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.guusto.com/api/v1/balances/members/:employeeNumber/currencies/:currency",
+            "headers": [{ "name": "X-Workspace-id", "value": "{{workspaceId}}" }],
+            "params": [
+              { "name": "employeeNumber", "value": "", "type": "path", "description": "Member employee number." },
+              { "name": "currency", "value": "USD", "type": "path", "description": "CAD or USD." }
+            ]
+          },
+          "docs": "Retrieve the available reward budget for a single member."
+        },
+        {
+          "info": { "name": "Get all member budgets.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.guusto.com/api/v1/balances/members/currencies/:currency",
+            "headers": [{ "name": "X-Workspace-id", "value": "{{workspaceId}}" }],
+            "params": [
+              { "name": "currency", "value": "USD", "type": "path", "description": "CAD or USD." },
+              { "name": "page", "value": "0", "type": "query" },
+              { "name": "size", "value": "20", "type": "query" }
+            ]
+          },
+          "docs": "Retrieve paginated available reward budgets for all members."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Reports", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get team activity.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.guusto.com/api/v1/reports/teams/activity",
+            "headers": [{ "name": "X-Workspace-id", "value": "{{workspaceId}}" }],
+            "params": [
+              { "name": "page", "value": "0", "type": "query" },
+              { "name": "size", "value": "20", "type": "query" }
+            ]
+          },
+          "docs": "Retrieve paginated workspace recognition activity."
+        },
+        {
+          "info": { "name": "Get last recognized by manager.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.guusto.com/api/v1/reports/members/last-recognized",
+            "headers": [{ "name": "X-Workspace-id", "value": "{{workspaceId}}" }],
+            "params": [
+              { "name": "page", "value": "0", "type": "query" },
+              { "name": "size", "value": "20", "type": "query" }
+            ]
+          },
+          "docs": "Retrieve paginated last-recognized-by-manager data. This resource is rate limited."
+        }
+      ]
+    }
+  ]
+}

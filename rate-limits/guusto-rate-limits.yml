@@ -1,0 +1,61 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Guusto
+providerId: guusto
+created: '2026-07-10'
+modified: '2026-07-10'
+reconciled: false
+tags:
+- Employee Recognition
+- Rewards
+- Rate Limiting
+- Quotas
+description: >-
+  Guusto does not publish blanket numeric rate limits for its Gifts API. The
+  documentation states that the Manager Insights reporting resource
+  (GET /api/v1/reports/members/last-recognized) has a request limit, and that
+  exceeding it returns an error indicating the limit has been reached. Order
+  volume is effectively bounded by the workspace and member reward budgets
+  rather than by a per-minute request cap, and gift orders accept up to 20
+  items per request.
+notes: >-
+  Exact numeric thresholds and time windows are not documented as of the review
+  date. Verify the Manager Insights request limit and any other per-endpoint
+  limits with Guusto (Premium plan) during reconciliation.
+sources:
+- https://docs.guusto.com/
+- https://docs.guusto.com/version/pages/request-limits-and-throttling
+- https://docs.guusto.com/version/openapi/reports
+responseCodes:
+  throttled: 429
+limits:
+- name: Manager Insights (Last Recognized)
+  scope: resource
+  metric: requests
+  limit: published limit (numeric value not disclosed)
+  notes: >-
+    GET /api/v1/reports/members/last-recognized is rate limited; exceeding it
+    throws an error indicating the limit has been reached.
+- name: Gift Order Items
+  scope: request
+  metric: items
+  limit: 20
+  notes: A single POST /api/v1/orders request accepts 1 to 20 gift items.
+- name: General API Requests
+  scope: account
+  metric: requests
+  limit: not published
+  notes: No blanket numeric request-rate limit is documented for the broader Gifts API.
+policies:
+- name: Budget Bound
+  description: >-
+    Gift ordering is constrained by available workspace and member reward
+    budgets (retrievable via the Account Budget API) rather than a request cap.
+- name: Backoff Strategy
+  description: >-
+    Clients should implement exponential backoff with jitter and honor error
+    responses that indicate a limit has been reached before retrying.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,182 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Guusto
+providerId: guusto
+created: '2026-07-10'
+modified: '2026-07-10'
+reconciled: false
+tags:
+- Employee Recognition
+- Rewards
+- Gifting
+- HR
+- Plans
+description: >-
+  Guusto sells the recognition platform on a per-seat SaaS subscription with
+  four tiers - Free, Lite, Essential, and Premium - billed monthly or yearly in
+  USD or CAD. Seats are split into sender seats (people who send rewards) and
+  recipient seats (people who can receive them). API access is included only on
+  the Premium plan; the lower tiers do not expose the Gifts API. The Gifts API
+  itself is not separately metered - it drives the same reward budget you fund
+  through your subscription and gift funding.
+notes: >-
+  Prices below are from the public Guusto pricing page and may change; verify
+  current per-seat rates, minimums, and API entitlement during reconciliation.
+  Gift face value (the amount loaded onto each reward) is funded separately from
+  the platform subscription.
+sources:
+- https://guusto.com/pricing
+- https://docs.guusto.com/
+- https://help.guusto.com/en/articles/10970851-how-can-i-use-guusto-s-api
+plans:
+- id: guusto-free
+  name: Free
+  type: free
+  description: >-
+    Entry tier for sending rewards with core redemption features - 100+
+    merchants, offline print, mobile app, and multiple languages - with limited
+    automation. No API access.
+  entries:
+  - label: Platform
+    name: platform
+    type: flat
+    metric: subscription
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: '0'
+    userMultiplied: false
+  elements:
+  - name: Send Rewards
+  - name: Offline Print
+  - name: Mobile App
+  - name: Multiple Languages
+  - name: No API Access
+- id: guusto-lite
+  name: Lite
+  type: flat
+  description: >-
+    Flat monthly plan bundling one sender seat and 250 recipient seats with
+    milestone automation, bulk rewards, scheduling, and prepaid Mastercard. No
+    API access.
+  entries:
+  - label: Platform (1 sender + 250 recipient seats)
+    name: platform
+    type: flat
+    metric: subscription
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: '150'
+    currency: USD
+    userMultiplied: false
+  elements:
+  - name: Milestone Automation
+  - name: Bulk Rewards
+  - name: Scheduling
+  - name: Prepaid Mastercard
+  - name: No API Access
+- id: guusto-essential
+  name: Essential
+  type: paid
+  description: >-
+    Per-seat plan (most popular) adding HRIS integration, social feeds,
+    leaderboards, automated draws, custom branding, reports, charity donations,
+    and manager insights, with a monthly minimum. No API access.
+  entries:
+  - label: Sender Seat
+    name: sender_seat
+    type: subscription
+    metric: seats
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: '4.00'
+    currency: USD
+    userMultiplied: true
+  - label: Recipient Seat
+    name: recipient_seat
+    type: subscription
+    metric: seats
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: '0.70'
+    currency: USD
+    userMultiplied: true
+  - label: Monthly Minimum
+    name: minimum
+    type: flat
+    metric: subscription
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: '200'
+    currency: USD
+    userMultiplied: false
+  elements:
+  - name: HRIS Integration
+  - name: Social Feeds
+  - name: Leaderboards
+  - name: Reports
+  - name: Manager Insights
+  - name: No API Access
+- id: guusto-premium
+  name: Premium
+  type: paid
+  description: >-
+    Enterprise per-seat plan including everything in Essential plus SSO,
+    Microsoft Teams / SharePoint / Outlook integrations, budget automation,
+    approvals, custom data fields, global and custom rewards, a dedicated
+    account manager, and API access to the Guusto Gifts API.
+  entries:
+  - label: Sender Seat
+    name: sender_seat
+    type: subscription
+    metric: seats
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: '5.00'
+    currency: USD
+    userMultiplied: true
+  - label: Recipient Seat
+    name: recipient_seat
+    type: subscription
+    metric: seats
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: '1.00'
+    currency: USD
+    userMultiplied: true
+  - label: Monthly Minimum
+    name: minimum
+    type: flat
+    metric: subscription
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: '500'
+    currency: USD
+    userMultiplied: false
+  elements:
+  - name: API Access
+  - name: SSO
+  - name: Microsoft Teams / SharePoint / Outlook
+  - name: Budget Automation
+  - name: Approvals
+  - name: Global and Custom Rewards
+  - name: Dedicated Account Manager
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

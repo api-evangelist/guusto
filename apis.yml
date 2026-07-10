@@ -1,0 +1,111 @@
+aid: guusto
+url: https://raw.githubusercontent.com/api-evangelist/guusto/refs/heads/main/apis.yml
+name: Guusto
+kind: company
+description: Guusto is an employee recognition and rewards platform that lets teams
+  send digital gifts, run peer-to-peer and top-down recognition programs, and
+  redeem rewards with 60,000+ merchant locations, prepaid Mastercard, and charitable
+  donations. Guusto exposes a REST Gifts API - available on the Premium plan - for
+  programmatically ordering gifts, tracking order status, retrieving workspace and
+  member reward budgets, and pulling recognition activity and manager insight
+  reports. Requests are authenticated with a Bearer API token plus an X-Workspace-id
+  header against production (api.guusto.com) or a demo test environment
+  (api-demo.guusto.io).
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Employee Recognition
+- Rewards
+- Gifting
+- Gift Cards
+- HR
+- Rewards and Recognition
+created: '2026-07-10'
+modified: '2026-07-10'
+specificationVersion: '0.19'
+apis:
+- aid: guusto:guusto-gifts-api
+  name: Guusto Gifts API
+  tags:
+  - Gifts
+  - Orders
+  - Recognition
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.guusto.com/version/openapi/order-gift
+  baseURL: https://api.guusto.com/api/v1
+  properties:
+  - url: https://docs.guusto.com/
+    type: Documentation
+  - url: https://docs.guusto.com/version/openapi/order-gift
+    type: APIReference
+  - url: openapi/guusto-openapi.yml
+    type: OpenAPI
+  - url: collections/guusto.postman_collection.json
+    type: PostmanCollection
+  - url: collections/guusto.opencollection.json
+    type: OpenCollection
+  description: Order one or more digital gifts to recipients (by email or employee
+    number), then track each order's processing status and details. Submit a batch
+    of up to 20 gift items in a single order with a message, amount, currency, and
+    optional language.
+- aid: guusto:guusto-account-budget-api
+  name: Guusto Account Budget API
+  tags:
+  - Budget
+  - Balances
+  - Rewards
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.guusto.com/version/openapi/account-budget
+  baseURL: https://api.guusto.com/api/v1
+  properties:
+  - url: https://docs.guusto.com/
+    type: Documentation
+  - url: https://docs.guusto.com/version/openapi/account-budget
+    type: APIReference
+  - url: openapi/guusto-openapi.yml
+    type: OpenAPI
+  - url: collections/guusto.postman_collection.json
+    type: PostmanCollection
+  - url: collections/guusto.opencollection.json
+    type: OpenCollection
+  description: Retrieve available reward budget balances for a workspace, for a single
+    member by employee number, or for all members - scoped by currency (CAD or USD)
+    - so integrations can check spending power before ordering gifts.
+- aid: guusto:guusto-reports-api
+  name: Guusto Reports API
+  tags:
+  - Reports
+  - Analytics
+  - Manager Insights
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.guusto.com/version/openapi/reports
+  baseURL: https://api.guusto.com/api/v1
+  properties:
+  - url: https://docs.guusto.com/
+    type: Documentation
+  - url: https://docs.guusto.com/version/openapi/reports
+    type: APIReference
+  - url: openapi/guusto-openapi.yml
+    type: OpenAPI
+  - url: collections/guusto.postman_collection.json
+    type: PostmanCollection
+  - url: collections/guusto.opencollection.json
+    type: OpenCollection
+  description: Pull paginated recognition activity for teams (sender, receiver, status,
+    reason, timestamps) and manager-insight data on when team members were last
+    recognized by their managers. The manager-insight resource is rate limited.
+common:
+- type: LinkedIn
+  url: https://www.linkedin.com/company/guusto
+- type: Website
+  url: https://guusto.com
+- type: Documentation
+  url: https://docs.guusto.com/
+- type: Plans
+  url: plans/guusto-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/guusto-rate-limits.yml
+- type: FinOps
+  url: finops/guusto-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

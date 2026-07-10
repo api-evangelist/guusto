@@ -1,0 +1,101 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Guusto
+providerId: guusto
+created: '2026-07-10'
+modified: '2026-07-10'
+reconciled: false
+tags:
+- Employee Recognition
+- Rewards
+- Gifting
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Guusto spend. Guusto cost has two distinct components: (1) the
+  platform subscription, a per-seat SaaS fee (sender and recipient seats) across
+  the Free, Lite, Essential, and Premium tiers, with API access included only on
+  Premium; and (2) reward funding, the face value of gifts actually sent, which
+  is funded separately and drawn down from workspace and member budgets. The
+  Gifts API does not carry its own usage fee - it drives the same reward budget
+  you fund - so API-driven cost is really gift spend, observable through the
+  Account Budget and Reports APIs.
+notes: >-
+  Per-unit reward funding is customer-directed (the amount loaded per gift, 1 to
+  10000), so gift spend is a variable cost distinct from the fixed per-seat
+  subscription. Verify current seat rates and minimums on the Guusto pricing
+  page during reconciliation.
+sources:
+- https://guusto.com/pricing
+- https://docs.guusto.com/
+- https://docs.guusto.com/version/openapi/account-budget
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Guusto
+serviceCategory: Human Resources and Recognition
+billingModel:
+  pricingCategory: Subscription and Consumption
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Purchase
+  - Usage
+focusColumns:
+  ServiceName: Guusto
+  ServiceCategory: Human Resources and Recognition
+  ProviderName: Guusto
+  PublisherName: Guusto
+  InvoiceIssuerName: Guusto
+  BillingCurrency: USD
+  ChargeCategory: Purchase
+  PricingCategory: Subscription
+meters:
+- name: sender_seats
+  description: Per-seat monthly subscription for users who send rewards.
+  unit: seats
+  aggregation: sum
+  dimensions:
+  - workspace
+  - plan
+- name: recipient_seats
+  description: Per-seat monthly subscription for users who can receive rewards.
+  unit: seats
+  aggregation: sum
+  dimensions:
+  - workspace
+  - plan
+- name: gift_funding
+  description: Face value of gifts sent, drawn from workspace and member reward budgets.
+  unit: currency
+  aggregation: sum
+  dimensions:
+  - workspace
+  - member
+  - currency
+principles:
+- name: Visibility
+  description: >-
+    Track seat counts against plan minimums and monitor reward budget drawdown
+    per workspace and member via the Account Budget and Reports APIs.
+- name: Allocation
+  description: >-
+    Attribute gift spend to teams and members using employee numbers and the
+    team activity report so recognition cost maps to internal cost centers.
+- name: Optimization
+  description: >-
+    Right-size sender vs recipient seats to the plan minimum, and set budgets
+    and approvals (Premium) to keep gift funding within plan.
+- name: Accountability
+  description: >-
+    Assign budget owners per workspace and review monthly seat spend plus gift
+    funding against the recognition program budget.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

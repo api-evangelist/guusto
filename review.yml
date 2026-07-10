@@ -1,0 +1,81 @@
+aid: guusto
+name: Guusto
+review:
+  question: Does Guusto expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-10'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. Guusto's documented public surface (the
+    Gifts API at docs.guusto.com) is request/response REST over HTTPS - order a
+    gift, poll order status, read budgets, pull reports. There is no server-push
+    transport (WebSocket or SSE) on Guusto's own API to model. Order processing
+    is asynchronous, but its progress is observed by polling the order status
+    endpoint, not by a streamed connection.
+findings:
+  summary: |
+    Guusto does publish a documented public REST API - the Guusto Gifts API at
+    docs.guusto.com - but it does NOT expose a documented public WebSocket API.
+    Guusto is an employee recognition and rewards / gifting platform. The Gifts
+    API lets you order digital gifts, track order status, retrieve workspace and
+    member reward budgets, and pull recognition activity and manager-insight
+    reports. It is pure request/response REST over HTTPS, authenticated with a
+    Bearer API token plus an X-Workspace-id header. Base URLs are
+    https://api.guusto.com/api/v1 (production) and https://api-demo.guusto.io/api/v1
+    (demo/test). No realtime, bidirectional, or streaming WebSocket (ws:// or
+    wss://) endpoint is documented anywhere in Guusto's API reference.
+  accessModel: |
+    API access is gated to the Guusto Premium plan. The Free, Lite, and
+    Essential tiers do not include API access per the public pricing page. The
+    API is real and fully documented (OpenAPI-backed reference with a mock
+    server), not merely an integration/webhook/SSO story - though Guusto also
+    offers HRIS integrations, SSO, and Microsoft Teams/SharePoint/Outlook
+    integrations on higher tiers.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.guusto.com/api/v1
+      documented: true
+      note: Guusto Gifts API - orders, budgets, reports. Demo base is https://api-demo.guusto.io/api/v1.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented anywhere in Guusto's API reference as of the review date.
+  endpointsConfirmedRest:
+    - POST   https://api.guusto.com/api/v1/orders
+    - GET    https://api.guusto.com/api/v1/orders/status/{requestId}
+    - GET    https://api.guusto.com/api/v1/orders/{requestId}
+    - GET    https://api.guusto.com/api/v1/balances/workspaces/currencies/{currency}
+    - GET    https://api.guusto.com/api/v1/balances/members/{employeeNumber}/currencies/{currency}
+    - GET    https://api.guusto.com/api/v1/balances/members/currencies/{currency}
+    - GET    https://api.guusto.com/api/v1/reports/teams/activity
+    - GET    https://api.guusto.com/api/v1/reports/members/last-recognized
+  endpointsModeled: false
+sources:
+  - url: https://docs.guusto.com/
+    type: Documentation
+    note: Welcome / API landing; sections for Authentication, Environments, Gifts API, Account Budget, Order Gift, Reports.
+  - url: https://docs.guusto.com/version/openapi/order-gift
+    type: APIReference
+    note: POST /api/v1/orders plus GET order status and order detail; Bearer + X-Workspace-id headers; 201 response schema.
+  - url: https://docs.guusto.com/version/openapi/account-budget
+    type: APIReference
+    note: Workspace, single-member, and all-member budget balances scoped by currency.
+  - url: https://docs.guusto.com/version/openapi/reports
+    type: APIReference
+    note: Team activity and last-recognized-by-manager reports; manager-insight resource is rate limited.
+  - url: https://guusto.com/pricing
+    type: Pricing
+    note: Free / Lite / Essential / Premium per-seat plans; API access included only on Premium.
+  - url: https://help.guusto.com/en/articles/10970851-how-can-i-use-guusto-s-api
+    type: Documentation
+    note: Help-center article on using Guusto's API (returned 403 to automated fetch; referenced from search).
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists on Guusto's own API, and the documented
+    public surface is request/response REST (Gifts API). No AsyncAPI document was
+    created because there is no server-push transport to model; asynchronous
+    order processing is observed by polling the order status endpoint.
