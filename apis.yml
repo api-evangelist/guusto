@@ -94,6 +94,12 @@ apis:
     reason, timestamps) and manager-insight data on when team members were last
     recognized by their managers. The manager-insight resource is rate limited.
 common:
+- type: TrustCenter
+  url: security/guusto-trust-center.yml
+- type: DomainSecurity
+  url: security/guusto-domain-security.yml
+- type: Authentication
+  url: authentication/guusto-authentication.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/guusto
 - type: Website

@@ -1,0 +1,13 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/guusto-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: Bearer API token issued from the Guusto workspace (Premium plan).
+  sources:
+  - openapi/guusto-openapi.yml
