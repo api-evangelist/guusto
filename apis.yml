@@ -94,6 +94,8 @@ apis:
     reason, timestamps) and manager-insight data on when team members were last
     recognized by their managers. The manager-insight resource is rate limited.
 common:
+- type: AgenticAccess
+  url: agentic-access/guusto-agentic-access.yml
 - type: TrustCenter
   url: security/guusto-trust-center.yml
 - type: DomainSecurity
