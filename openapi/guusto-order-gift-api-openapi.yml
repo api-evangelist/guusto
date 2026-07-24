@@ -1,0 +1,192 @@
+openapi: 3.0.3
+info:
+  title: Guusto Gifts Account Budget Order Gift API
+  description: The Guusto Gifts API lets you programmatically send digital gifts, track order status, retrieve reward budgets, and pull recognition activity and manager-insight reports from the Guusto employee recognition and rewards platform. API access is available on the Guusto Premium plan. All requests are authenticated with a Bearer API token and an X-Workspace-id header. This document models Guusto's publicly documented REST surface (docs.guusto.com); request and response schemas are summarized from the published API reference and may not capture every field.
+  version: '1.0'
+  contact:
+    name: Guusto
+    url: https://guusto.com
+  termsOfService: https://guusto.com/terms
+servers:
+- url: https://api.guusto.com/api/v1
+  description: Production
+- url: https://api-demo.guusto.io/api/v1
+  description: Demo / Test
+security:
+- bearerAuth: []
+tags:
+- name: Order Gift
+  description: Order digital gifts and track order status.
+paths:
+  /orders:
+    post:
+      tags:
+      - Order Gift
+      summary: Order gifts
+      description: Submit an order of one to twenty gift items. Each item carries a message, an amount, and a recipient identified by email or employee number (email takes precedence when both are present).
+      operationId: createOrder
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/CustomerRequestId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderRequest'
+      responses:
+        '201':
+          description: Order accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderResponse'
+        '400':
+          description: Invalid request.
+        '401':
+          description: Missing or invalid authentication.
+  /orders/status/{requestId}:
+    get:
+      tags:
+      - Order Gift
+      summary: Get order status
+      description: Retrieve the processing status of a previously submitted order.
+      operationId: getOrderStatus
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: requestId
+        in: path
+        required: true
+        description: The order tracking ID returned when the order was created.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Order status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderResponse'
+        '404':
+          description: Order not found.
+  /orders/{requestId}:
+    get:
+      tags:
+      - Order Gift
+      summary: Get order
+      description: Retrieve the full details of a previously submitted order.
+      operationId: getOrder
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: requestId
+        in: path
+        required: true
+        description: The order tracking ID returned when the order was created.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Order details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderResponse'
+        '404':
+          description: Order not found.
+components:
+  schemas:
+    Recipient:
+      type: object
+      description: The gift recipient, identified by employeeNumber or email (email takes precedence when both are supplied).
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        employeeNumber:
+          type: string
+        email:
+          type: string
+          format: email
+    OrderRequest:
+      type: object
+      required:
+      - orderItems
+      - currency
+      properties:
+        orderItems:
+          type: array
+          minItems: 1
+          maxItems: 20
+          items:
+            $ref: '#/components/schemas/OrderItem'
+        currency:
+          type: string
+          enum:
+          - CAD
+          - USD
+        language:
+          type: string
+          enum:
+          - ES_MX
+          - FR_CA
+          - EN_CA
+          description: Optional language for the gift experience.
+    OrderItem:
+      type: object
+      required:
+      - message
+      - amount
+      - recipient
+      properties:
+        message:
+          type: string
+          description: Message shown to the recipient.
+        amount:
+          type: number
+          minimum: 1
+          maximum: 10000
+          description: Gift amount.
+        recipient:
+          $ref: '#/components/schemas/Recipient'
+    OrderResponse:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: Order tracking ID.
+        requestStatus:
+          type: string
+          enum:
+          - ACCEPTED
+          - WAITING_PROCESSING
+          - PROCESSING_IN_PROGRESS
+          - COMPLETED
+          - FAILED
+        orderStep:
+          type: string
+          description: Current processing step, e.g. PENDING, PRECHECK_ORDER, COMPLETED.
+        orderId:
+          type: integer
+        customerRequestId:
+          type: string
+  parameters:
+    CustomerRequestId:
+      name: X-Customer-Request-Id
+      in: header
+      required: false
+      description: Optional idempotency / correlation identifier supplied by the caller.
+      schema:
+        type: string
+    WorkspaceId:
+      name: X-Workspace-id
+      in: header
+      required: true
+      description: The workspace the request is scoped to.
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Bearer API token issued from the Guusto workspace (Premium plan).
