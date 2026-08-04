@@ -1,0 +1,18 @@
+{
+  "provider": "guusto",
+  "sources": [
+    "guusto-account-budget-api-openapi.yml",
+    "guusto-order-gift-api-openapi.yml",
+    "guusto-reports-api-openapi.yml"
+  ],
+  "outputs": [
+    "guusto-account-budget-api-openapi.yml",
+    "guusto-order-gift-api-openapi.yml",
+    "guusto-reports-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
