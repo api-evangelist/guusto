@@ -1,0 +1,117 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Guusto Gifts Account Budget API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Account Budget",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get workspace budget",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.guusto.com/api/v1/balances/workspaces/currencies/:currency",
+            "headers": [
+              {
+                "name": "X-Workspace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "path",
+                "description": "ISO currency code supported by Guusto."
+              }
+            ]
+          },
+          "docs": "Retrieve the available reward budget balance for the workspace."
+        },
+        {
+          "info": {
+            "name": "Get member budget",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.guusto.com/api/v1/balances/members/:employeeNumber/currencies/:currency",
+            "headers": [
+              {
+                "name": "X-Workspace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "employeeNumber",
+                "value": "",
+                "type": "path",
+                "description": "The member's employee number."
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "path",
+                "description": "ISO currency code supported by Guusto."
+              }
+            ]
+          },
+          "docs": "Retrieve the available reward budget balance for a single member."
+        },
+        {
+          "info": {
+            "name": "Get all member budgets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.guusto.com/api/v1/balances/members/currencies/:currency",
+            "headers": [
+              {
+                "name": "X-Workspace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "currency",
+                "value": "",
+                "type": "path",
+                "description": "ISO currency code supported by Guusto."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Zero-based page index."
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "Page size."
+              }
+            ]
+          },
+          "docs": "Retrieve paginated available reward budget balances for all members."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

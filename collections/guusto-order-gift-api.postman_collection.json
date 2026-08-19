@@ -1,0 +1,609 @@
+{
+  "item": [
+    {
+      "id": "17da8e83-c3e6-46c3-ac84-6c720334865c",
+      "name": "Order Gift",
+      "description": {
+        "content": "Order digital gifts and track order status.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f14f0d0c-afa6-4e00-9b70-c4b27c4e5cfe",
+          "name": "Order gifts",
+          "request": {
+            "name": "Order gifts",
+            "description": {
+              "content": "Submit an order of one to twenty gift items. Each item carries a message, an amount, and a recipient identified by email or employee number (email takes precedence when both are present).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The workspace the request is scoped to.",
+                "key": "X-Workspace-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Optional idempotency / correlation identifier supplied by the caller.",
+                "key": "X-Customer-Request-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"orderItems\": [\n    {\n      \"message\": \"<string>\",\n      \"amount\": \"<number>\",\n      \"recipient\": {\n        \"firstName\": \"<string>\",\n        \"lastName\": \"<string>\",\n        \"employeeNumber\": \"<string>\",\n        \"email\": \"<email>\"\n      }\n    }\n  ],\n  \"currency\": \"<string>\",\n  \"language\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9eefcb78-4ca0-473f-9b32-7190149d259e",
+              "name": "Order accepted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The workspace the request is scoped to.",
+                    "key": "X-Workspace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional idempotency / correlation identifier supplied by the caller.",
+                    "key": "X-Customer-Request-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"orderItems\": [\n    {\n      \"message\": \"<string>\",\n      \"amount\": \"<number>\",\n      \"recipient\": {\n        \"firstName\": \"<string>\",\n        \"lastName\": \"<string>\",\n        \"employeeNumber\": \"<string>\",\n        \"email\": \"<email>\"\n      }\n    }\n  ],\n  \"currency\": \"<string>\",\n  \"language\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"string\",\n  \"requestStatus\": \"FAILED\",\n  \"orderStep\": \"string\",\n  \"orderId\": 8039,\n  \"customerRequestId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "06685293-ab63-478a-aa74-cafeb06e4d4c",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The workspace the request is scoped to.",
+                    "key": "X-Workspace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional idempotency / correlation identifier supplied by the caller.",
+                    "key": "X-Customer-Request-Id",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"orderItems\": [\n    {\n      \"message\": \"<string>\",\n      \"amount\": \"<number>\",\n      \"recipient\": {\n        \"firstName\": \"<string>\",\n        \"lastName\": \"<string>\",\n        \"employeeNumber\": \"<string>\",\n        \"email\": \"<email>\"\n      }\n    }\n  ],\n  \"currency\": \"<string>\",\n  \"language\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4371c16e-7134-49ef-8fab-daac033845cc",
+              "name": "Missing or invalid authentication.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The workspace the request is scoped to.",
+                    "key": "X-Workspace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional idempotency / correlation identifier supplied by the caller.",
+                    "key": "X-Customer-Request-Id",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"orderItems\": [\n    {\n      \"message\": \"<string>\",\n      \"amount\": \"<number>\",\n      \"recipient\": {\n        \"firstName\": \"<string>\",\n        \"lastName\": \"<string>\",\n        \"employeeNumber\": \"<string>\",\n        \"email\": \"<email>\"\n      }\n    }\n  ],\n  \"currency\": \"<string>\",\n  \"language\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3436ab44-9db2-49ca-8779-b819e925cacc",
+          "name": "Get order status",
+          "request": {
+            "name": "Get order status",
+            "description": {
+              "content": "Retrieve the processing status of a previously submitted order.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders",
+                "status",
+                ":requestId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "requestId",
+                  "description": "(Required) The order tracking ID returned when the order was created."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The workspace the request is scoped to.",
+                "key": "X-Workspace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2cc79d85-18e8-4d08-8211-7a49a3dc0777",
+              "name": "Order status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    "status",
+                    ":requestId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "requestId",
+                      "description": "(Required) The order tracking ID returned when the order was created."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The workspace the request is scoped to.",
+                    "key": "X-Workspace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"string\",\n  \"requestStatus\": \"FAILED\",\n  \"orderStep\": \"string\",\n  \"orderId\": 8039,\n  \"customerRequestId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e7ae01e0-b689-4dc2-acb6-f34f382c454c",
+              "name": "Order not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    "status",
+                    ":requestId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "requestId",
+                      "description": "(Required) The order tracking ID returned when the order was created."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The workspace the request is scoped to.",
+                    "key": "X-Workspace-id",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c2b9335b-da6d-481d-82f8-a366c27fb64c",
+          "name": "Get order",
+          "request": {
+            "name": "Get order",
+            "description": {
+              "content": "Retrieve the full details of a previously submitted order.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders",
+                ":requestId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "requestId",
+                  "description": "(Required) The order tracking ID returned when the order was created."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The workspace the request is scoped to.",
+                "key": "X-Workspace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cda19627-2858-4dc9-9902-7206711a7b9b",
+              "name": "Order details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":requestId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "requestId",
+                      "description": "(Required) The order tracking ID returned when the order was created."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The workspace the request is scoped to.",
+                    "key": "X-Workspace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"string\",\n  \"requestStatus\": \"FAILED\",\n  \"orderStep\": \"string\",\n  \"orderId\": 8039,\n  \"customerRequestId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b252950-c2f6-48a1-b124-4bfe7aa856c0",
+              "name": "Order not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":requestId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "requestId",
+                      "description": "(Required) The order tracking ID returned when the order was created."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The workspace the request is scoped to.",
+                    "key": "X-Workspace-id",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.guusto.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "28da9032-7100-4797-8280-5e43a56e2f73",
+    "name": "Guusto Gifts Account Budget Order Gift API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Guusto Gifts API lets you programmatically send digital gifts, track order status, retrieve reward budgets, and pull recognition activity and manager-insight reports from the Guusto employee recognition and rewards platform. API access is available on the Guusto Premium plan. All requests are authenticated with a Bearer API token and an X-Workspace-id header. This document models Guusto's publicly documented REST surface (docs.guusto.com); request and response schemas are summarized from the published API reference and may not capture every field.\n\nContact Support:\n Name: Guusto",
+      "type": "text/plain"
+    }
+  }
+}

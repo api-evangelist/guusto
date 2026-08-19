@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Guusto Gifts Account Budget Reports API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get team activity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.guusto.com/api/v1/reports/teams/activity",
+            "headers": [
+              {
+                "name": "X-Workspace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Zero-based page index."
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "Page size."
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of workspace recognition activities including sender, receiver, status, description, reason, and timestamps."
+        },
+        {
+          "info": {
+            "name": "Get last recognized by manager",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.guusto.com/api/v1/reports/members/last-recognized",
+            "headers": [
+              {
+                "name": "X-Workspace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Zero-based page index."
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "Page size."
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of team members with the last time they were recognized by their managers. This manager-insight resource is rate limited."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,415 @@
+{
+  "item": [
+    {
+      "id": "5ccd4a84-c0ba-47e3-bf5d-8bd61674c0c7",
+      "name": "Account Budget",
+      "description": {
+        "content": "Retrieve available reward budget balances.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "696d5141-21f8-48d0-8d01-a392c1bc86cd",
+          "name": "Get workspace budget",
+          "request": {
+            "name": "Get workspace budget",
+            "description": {
+              "content": "Retrieve the available reward budget balance for the workspace.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "balances",
+                "workspaces",
+                "currencies",
+                ":currency"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "currency",
+                  "description": "(Required) ISO currency code supported by Guusto."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The workspace the request is scoped to.",
+                "key": "X-Workspace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3f9177a6-3512-4275-87ef-f4fcaba49fc5",
+              "name": "Available workspace budget.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "balances",
+                    "workspaces",
+                    "currencies",
+                    ":currency"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "currency",
+                      "description": "(Required) ISO currency code supported by Guusto."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The workspace the request is scoped to.",
+                    "key": "X-Workspace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"amount\": 9310.385133388616,\n  \"currency\": \"CAD\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "60d731c5-943a-4dc6-99ce-91d43161dc99",
+          "name": "Get member budget",
+          "request": {
+            "name": "Get member budget",
+            "description": {
+              "content": "Retrieve the available reward budget balance for a single member.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "balances",
+                "members",
+                ":employeeNumber",
+                "currencies",
+                ":currency"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "employeeNumber",
+                  "description": "(Required) The member's employee number."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "currency",
+                  "description": "(Required) ISO currency code supported by Guusto."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The workspace the request is scoped to.",
+                "key": "X-Workspace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1d2b6b16-2c84-4f2e-bddb-a4b3afd4d704",
+              "name": "Available member budget.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "balances",
+                    "members",
+                    ":employeeNumber",
+                    "currencies",
+                    ":currency"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "employeeNumber",
+                      "description": "(Required) The member's employee number."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "currency",
+                      "description": "(Required) ISO currency code supported by Guusto."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The workspace the request is scoped to.",
+                    "key": "X-Workspace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"amount\": 9310.385133388616,\n  \"currency\": \"CAD\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0f453a9d-ae46-42b2-b3d3-b0067e8aadc2",
+          "name": "Get all member budgets",
+          "request": {
+            "name": "Get all member budgets",
+            "description": {
+              "content": "Retrieve paginated available reward budget balances for all members.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "balances",
+                "members",
+                "currencies",
+                ":currency"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0",
+                  "description": "Zero-based page index."
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "20",
+                  "description": "Page size."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "currency",
+                  "description": "(Required) ISO currency code supported by Guusto."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The workspace the request is scoped to.",
+                "key": "X-Workspace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "658a1378-704a-4af7-9d1d-66d109a8f0f3",
+              "name": "Paginated member budgets.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "balances",
+                    "members",
+                    "currencies",
+                    ":currency"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "currency",
+                      "description": "(Required) ISO currency code supported by Guusto."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The workspace the request is scoped to.",
+                    "key": "X-Workspace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"page\": 1087,\n  \"size\": 7638,\n  \"totalElements\": 857,\n  \"totalPages\": 5213,\n  \"memberBalanceResponses\": [\n    {\n      \"amount\": 6907.717357707964,\n      \"employeeNumber\": \"string\",\n      \"user\": {}\n    },\n    {\n      \"amount\": 4252.615099007497,\n      \"employeeNumber\": \"string\",\n      \"user\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.guusto.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "744d661c-6d74-4c36-a86d-5f96d662de0b",
+    "name": "Guusto Gifts Account Budget API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Guusto Gifts API lets you programmatically send digital gifts, track order status, retrieve reward budgets, and pull recognition activity and manager-insight reports from the Guusto employee recognition and rewards platform. API access is available on the Guusto Premium plan. All requests are authenticated with a Bearer API token and an X-Workspace-id header. This document models Guusto's publicly documented REST surface (docs.guusto.com); request and response schemas are summarized from the published API reference and may not capture every field.\n\nContact Support:\n Name: Guusto",
+      "type": "text/plain"
+    }
+  }
+}

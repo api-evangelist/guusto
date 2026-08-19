@@ -1,0 +1,99 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Guusto Gifts Account Budget Order Gift API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Order Gift",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Order gifts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.guusto.com/api/v1/orders",
+            "headers": [
+              {
+                "name": "X-Workspace-id",
+                "value": ""
+              },
+              {
+                "name": "X-Customer-Request-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit an order of one to twenty gift items. Each item carries a message, an amount, and a recipient identified by email or employee number (email takes precedence when both are present)."
+        },
+        {
+          "info": {
+            "name": "Get order status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.guusto.com/api/v1/orders/status/:requestId",
+            "headers": [
+              {
+                "name": "X-Workspace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path",
+                "description": "The order tracking ID returned when the order was created."
+              }
+            ]
+          },
+          "docs": "Retrieve the processing status of a previously submitted order."
+        },
+        {
+          "info": {
+            "name": "Get order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.guusto.com/api/v1/orders/:requestId",
+            "headers": [
+              {
+                "name": "X-Workspace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path",
+                "description": "The order tracking ID returned when the order was created."
+              }
+            ]
+          },
+          "docs": "Retrieve the full details of a previously submitted order."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
