@@ -11,6 +11,18 @@ description: Guusto is an employee recognition and rewards platform that lets te
   reports. Requests are authenticated with a Bearer API token plus an X-Workspace-id
   header against production (api.guusto.com) or a demo test environment
   (api-demo.guusto.io).
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
