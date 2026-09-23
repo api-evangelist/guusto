@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Guusto Gifts Account Budget Order Gift API
-  description: The Guusto Gifts API lets you programmatically send digital gifts, track order status, retrieve reward budgets, and pull recognition activity and manager-insight reports from the Guusto employee recognition and rewards platform. API access is available on the Guusto Premium plan. All requests are authenticated with a Bearer API token and an X-Workspace-id header. This document models Guusto's publicly documented REST surface (docs.guusto.com); request and response schemas are summarized from the published API reference and may not capture every field.
+  title: Guusto Gifts Order Gift API
+  description: The Guusto Gifts API lets you programmatically send digital gifts, track order status, retrieve reward budgets, and pull recognition activity and manager-insight reports from the Guusto employee recognition and rewards platform.
   version: '1.0'
   contact:
     name: Guusto
@@ -95,6 +95,27 @@ paths:
           description: Order not found.
 components:
   schemas:
+    OrderResponse:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: Order tracking ID.
+        requestStatus:
+          type: string
+          enum:
+          - ACCEPTED
+          - WAITING_PROCESSING
+          - PROCESSING_IN_PROGRESS
+          - COMPLETED
+          - FAILED
+        orderStep:
+          type: string
+          description: Current processing step, e.g. PENDING, PRECHECK_ORDER, COMPLETED.
+        orderId:
+          type: integer
+        customerRequestId:
+          type: string
     Recipient:
       type: object
       description: The gift recipient, identified by employeeNumber or email (email takes precedence when both are supplied).
@@ -108,6 +129,23 @@ components:
         email:
           type: string
           format: email
+    OrderItem:
+      type: object
+      required:
+      - message
+      - amount
+      - recipient
+      properties:
+        message:
+          type: string
+          description: Message shown to the recipient.
+        amount:
+          type: number
+          minimum: 1
+          maximum: 10000
+          description: Gift amount.
+        recipient:
+          $ref: '#/components/schemas/Recipient'
     OrderRequest:
       type: object
       required:
@@ -132,44 +170,6 @@ components:
           - FR_CA
           - EN_CA
           description: Optional language for the gift experience.
-    OrderItem:
-      type: object
-      required:
-      - message
-      - amount
-      - recipient
-      properties:
-        message:
-          type: string
-          description: Message shown to the recipient.
-        amount:
-          type: number
-          minimum: 1
-          maximum: 10000
-          description: Gift amount.
-        recipient:
-          $ref: '#/components/schemas/Recipient'
-    OrderResponse:
-      type: object
-      properties:
-        requestId:
-          type: string
-          description: Order tracking ID.
-        requestStatus:
-          type: string
-          enum:
-          - ACCEPTED
-          - WAITING_PROCESSING
-          - PROCESSING_IN_PROGRESS
-          - COMPLETED
-          - FAILED
-        orderStep:
-          type: string
-          description: Current processing step, e.g. PENDING, PRECHECK_ORDER, COMPLETED.
-        orderId:
-          type: integer
-        customerRequestId:
-          type: string
   parameters:
     CustomerRequestId:
       name: X-Customer-Request-Id

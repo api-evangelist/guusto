@@ -1,9 +1,7 @@
 {
   "provider": "guusto",
   "sources": [
-    "guusto-account-budget-api-openapi.yml",
-    "guusto-order-gift-api-openapi.yml",
-    "guusto-reports-api-openapi.yml"
+    "_original/guusto-openapi.yml"
   ],
   "outputs": [
     "guusto-account-budget-api-openapi.yml",
@@ -13,6 +11,14 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "guusto-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "guusto-account-budget-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "guusto-order-gift-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "guusto-reports-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
