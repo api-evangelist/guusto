@@ -58,14 +58,6 @@ paths:
           description: Request limit reached for the manager-insight resource.
 components:
   parameters:
-    Size:
-      name: size
-      in: query
-      required: false
-      description: Page size.
-      schema:
-        type: integer
-        default: 20
     Page:
       name: page
       in: query
@@ -81,6 +73,14 @@ components:
       description: The workspace the request is scoped to.
       schema:
         type: string
+    Size:
+      name: size
+      in: query
+      required: false
+      description: Page size.
+      schema:
+        type: integer
+        default: 20
   schemas:
     Page:
       type: object
