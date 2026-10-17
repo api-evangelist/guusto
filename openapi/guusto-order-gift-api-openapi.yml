@@ -94,43 +94,37 @@ paths:
         '404':
           description: Order not found.
 components:
-  parameters:
-    WorkspaceId:
-      name: X-Workspace-id
-      in: header
-      required: true
-      description: The workspace the request is scoped to.
-      schema:
-        type: string
-    CustomerRequestId:
-      name: X-Customer-Request-Id
-      in: header
-      required: false
-      description: Optional idempotency / correlation identifier supplied by the caller.
-      schema:
-        type: string
   schemas:
-    OrderResponse:
+    OrderItem:
       type: object
+      required:
+      - message
+      - amount
+      - recipient
       properties:
-        requestId:
+        message:
           type: string
-          description: Order tracking ID.
-        requestStatus:
+          description: Message shown to the recipient.
+        amount:
+          type: number
+          minimum: 1
+          maximum: 10000
+          description: Gift amount.
+        recipient:
+          $ref: '#/components/schemas/Recipient'
+    Recipient:
+      type: object
+      description: The gift recipient, identified by employeeNumber or email (email takes precedence when both are supplied).
+      properties:
+        firstName:
           type: string
-          enum:
-          - ACCEPTED
-          - WAITING_PROCESSING
-          - PROCESSING_IN_PROGRESS
-          - COMPLETED
-          - FAILED
-        orderStep:
+        lastName:
           type: string
-          description: Current processing step, e.g. PENDING, PRECHECK_ORDER, COMPLETED.
-        orderId:
-          type: integer
-        customerRequestId:
+        employeeNumber:
           type: string
+        email:
+          type: string
+          format: email
     OrderRequest:
       type: object
       required:
@@ -155,36 +149,42 @@ components:
           - FR_CA
           - EN_CA
           description: Optional language for the gift experience.
-    Recipient:
+    OrderResponse:
       type: object
-      description: The gift recipient, identified by employeeNumber or email (email takes precedence when both are supplied).
       properties:
-        firstName:
+        requestId:
           type: string
-        lastName:
+          description: Order tracking ID.
+        requestStatus:
           type: string
-        employeeNumber:
+          enum:
+          - ACCEPTED
+          - WAITING_PROCESSING
+          - PROCESSING_IN_PROGRESS
+          - COMPLETED
+          - FAILED
+        orderStep:
           type: string
-        email:
+          description: Current processing step, e.g. PENDING, PRECHECK_ORDER, COMPLETED.
+        orderId:
+          type: integer
+        customerRequestId:
           type: string
-          format: email
-    OrderItem:
-      type: object
-      required:
-      - message
-      - amount
-      - recipient
-      properties:
-        message:
-          type: string
-          description: Message shown to the recipient.
-        amount:
-          type: number
-          minimum: 1
-          maximum: 10000
-          description: Gift amount.
-        recipient:
-          $ref: '#/components/schemas/Recipient'
+  parameters:
+    WorkspaceId:
+      name: X-Workspace-id
+      in: header
+      required: true
+      description: The workspace the request is scoped to.
+      schema:
+        type: string
+    CustomerRequestId:
+      name: X-Customer-Request-Id
+      in: header
+      required: false
+      description: Optional idempotency / correlation identifier supplied by the caller.
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http
